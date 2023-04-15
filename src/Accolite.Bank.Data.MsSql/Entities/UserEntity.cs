@@ -12,5 +12,7 @@ public partial class UserEntity : BaseEntity
 
     public string Email { get; set; } = null!;
 
+#pragma warning disable CA2227 // Collection properties should be read only
     public virtual ICollection<AccountEntity> Accounts { get; set; } = new List<AccountEntity>();
+#pragma warning restore CA2227 // Collection properties should be read only
 }

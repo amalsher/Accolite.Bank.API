@@ -137,7 +137,7 @@ public class AccountServiceShould
         int accountId = 1;
         int userId = 1;
         decimal amount = 5000;
-        _mockAccountsProvider.Setup(x => x.GetOneAsync(accountId, It.IsAny<CancellationToken>())).ReturnsAsync((Account)null); // Account not found
+        _mockAccountsProvider.Setup(x => x.GetOneAsync(accountId, It.IsAny<CancellationToken>())).ReturnsAsync((Account?)null); // Account not found
 
         // Act and Assert
         await Assert.ThrowsAsync<AccountException>(() => _accountsService.DepositAsync(accountId, userId, amount));
@@ -199,7 +199,7 @@ public class AccountServiceShould
         int accountId = 1;
         int userId = 1;
         decimal amount = 5000;
-        _mockAccountsProvider.Setup(x => x.GetOneAsync(accountId, It.IsAny<CancellationToken>())).ReturnsAsync((Account)null); // Account not found
+        _mockAccountsProvider.Setup(x => x.GetOneAsync(accountId, It.IsAny<CancellationToken>())).ReturnsAsync((Account?)null); // Account not found
 
         // Act and Assert
         await Assert.ThrowsAsync<AccountException>(() => _accountsService.WithdrawAsync(accountId, userId, amount));

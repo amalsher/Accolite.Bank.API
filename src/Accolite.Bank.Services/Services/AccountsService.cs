@@ -62,6 +62,8 @@ public class AccountsService : IAccountsService
 
     public async Task DepositAsync(int accountId, int userId, decimal amount)
     {
+        VerifyAmount(amount);
+
         if (amount > MaxDepositAmount)
         {
             throw new AccountException($"Deposit amount cannot exceed ${MaxDepositAmount}");
@@ -80,6 +82,8 @@ public class AccountsService : IAccountsService
 
     public async Task WithdrawAsync(int accountId, int userId, decimal amount)
     {
+        VerifyAmount(amount);
+
         var account = await _accountsProvider.GetOneAsync(accountId);
 
         VerifyAccountExists(account);
@@ -122,6 +126,14 @@ public class AccountsService : IAccountsService
         if (account == null)
         {
             throw new AccountException("Account doesn't exist");
+        }
+    }
+
+    private static void VerifyAmount(decimal amount)
+    {
+        if (amount <= 0)
+        {
+            throw new AccountException("Wrong amount specified");
         }
     }
 }

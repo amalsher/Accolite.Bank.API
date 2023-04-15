@@ -1,4 +1,5 @@
 ﻿using Accolite.Bank.API.Configuration;
+using Accolite.Bank.API.Middleware;
 using Accolite.Bank.Services.Configuration;
 using Accolite.Bank.Services.Mapping;
 using Swashbuckle.AspNetCore.SwaggerGen;
@@ -39,10 +40,7 @@ public class Startup
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
-        if (env.IsDevelopment())
-        {
-            app.UseDeveloperExceptionPage();
-        }
+        app.ConfigureExceptionHandler();
 
         ConfigureSwaggerPipeline(app);
 
@@ -51,6 +49,13 @@ public class Startup
         app.UseRouting();
 
         app.UseAuthorization();
+
+        app.UseCors(options =>
+        {
+            options.AllowAnyOrigin();
+            options.AllowAnyHeader();
+            options.AllowAnyMethod();
+        });
 
         app.UseEndpoints(endpoints => endpoints.MapControllers());
     }
