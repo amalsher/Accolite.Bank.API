@@ -37,7 +37,7 @@ public class AccountsController : ControllerBase
     }
 
     [HttpPost("deposit")]
-    public async Task<ActionResult<Account>> DepositAsync(int accountId, int userId, decimal amount)
+    public async Task<ActionResult> DepositAsync(int accountId, int userId, decimal amount)
     {
         await _accountsService.DepositAsync(accountId, userId, amount);
         return Ok();

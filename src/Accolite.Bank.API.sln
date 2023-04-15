@@ -11,6 +11,10 @@ Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-co
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Accolite.Bank.Services", "Accolite.Bank.Services\Accolite.Bank.Services.csproj", "{B129AF22-09AD-40A2-A3F8-2E1F6B4AD1B8}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{3C943418-58CA-4D43-900F-3D00328E3345}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Accolite.Bank.Services.Tests", "tests\Accolite.Bank.Services.Tests\Accolite.Bank.Services.Tests.csproj", "{47CA508C-613F-4DB0-92B6-F0D9D94CC094}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,9 +37,16 @@ Global
 		{B129AF22-09AD-40A2-A3F8-2E1F6B4AD1B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B129AF22-09AD-40A2-A3F8-2E1F6B4AD1B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B129AF22-09AD-40A2-A3F8-2E1F6B4AD1B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47CA508C-613F-4DB0-92B6-F0D9D94CC094}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47CA508C-613F-4DB0-92B6-F0D9D94CC094}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47CA508C-613F-4DB0-92B6-F0D9D94CC094}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47CA508C-613F-4DB0-92B6-F0D9D94CC094}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{47CA508C-613F-4DB0-92B6-F0D9D94CC094} = {3C943418-58CA-4D43-900F-3D00328E3345}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9B3B7BA1-6AC0-4782-A70E-B172391B27BF}

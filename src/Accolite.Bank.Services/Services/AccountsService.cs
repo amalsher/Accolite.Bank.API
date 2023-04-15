@@ -36,6 +36,8 @@ public class AccountsService : IAccountsService
 
         var existingAccount = await _accountsProvider.GetOneAsync(account.Id);
 
+        VerifyAccountExists(existingAccount);
+
         if (account.Amount != existingAccount!.Amount)
         {
             throw new AccountException("This method cannot be used to modify funds");
@@ -44,14 +46,18 @@ public class AccountsService : IAccountsService
         return await _accountsProvider.UpdateAsync(account);
     }
 
-    public Task DeleteAsync(int id, int userId)
+    public async Task DeleteAsync(int id, int userId)
     {
-        if (id != userId)
+        var account = await _accountsProvider.GetOneAsync(id);
+
+        VerifyAccountExists(account);
+
+        if (account!.UserId != userId)
         {
             throw new AccountException("You cannot delete account for another user");
         }
 
-        return _accountsProvider.DeleteAsync(id);
+        await _accountsProvider.DeleteAsync(id);
     }
 
     public async Task DepositAsync(int accountId, int userId, decimal amount)
@@ -61,22 +67,26 @@ public class AccountsService : IAccountsService
             throw new AccountException($"Deposit amount cannot exceed ${MaxDepositAmount}");
         }
 
-        var account = (await _accountsProvider.GetOneAsync(accountId))!;
+        var account = await _accountsProvider.GetOneAsync(accountId);
 
-        VerifyAccountOwnerForModification(account, userId);
+        VerifyAccountExists(account);
 
-        account.Amount += amount;
+        VerifyAccountOwnerForModification(account!, userId);
+
+        account!.Amount += amount;
 
         await _accountsProvider.UpdateAsync(account);
     }
 
     public async Task WithdrawAsync(int accountId, int userId, decimal amount)
     {
-        var account = (await _accountsProvider.GetOneAsync(accountId))!;
+        var account = await _accountsProvider.GetOneAsync(accountId);
 
-        VerifyAccountOwnerForModification(account, userId);
+        VerifyAccountExists(account);
 
-        if (account.Amount - amount < MinAmount)
+        VerifyAccountOwnerForModification(account!, userId);
+
+        if (account!.Amount - amount < MinAmount)
         {
             throw new AccountException($"Account cannot have less than ${MinAmount} at any time");
         }
@@ -104,6 +114,14 @@ public class AccountsService : IAccountsService
         if (account!.UserId != userId)
         {
             throw new AccountException("You cannot modify account of another user");
+        }
+    }
+
+    private static void VerifyAccountExists(Account? account)
+    {
+        if (account == null)
+        {
+            throw new AccountException("Account doesn't exist");
         }
     }
 }
