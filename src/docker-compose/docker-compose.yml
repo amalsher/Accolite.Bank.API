@@ -1,0 +1,25 @@
+version: '3.4'
+
+services:
+  accolite.bank.api:
+    container_name: accolite-bank-api
+    image: ${DOCKER_REGISTRY-}accolitebankapi
+    build:
+      context: ../../
+      dockerfile: src/Accolite.Bank.API/Dockerfile
+  mssql:
+    container_name: mssql
+    image: "mcr.microsoft.com/mssql/server:2019-latest"
+    environment:
+      MSSQL_SA_PASSWORD: "QWERTY12!@QWERTY12!@"
+      ACCEPT_EULA: "Y"
+      MSSQL_PID: Developer
+      MSSQL_DATA_DIR: /var/opt/mssql/data
+      MSSQL_LOG_DIR: /var/opt/mssql/log
+      MSSQL_BACKUP_DIR: /var/opt/mssql/backup
+    ports:
+      - 1433:1433
+    volumes:
+      - /c/Users/amals/Desktop/Accolite/docker_storage/data:/var/opt/mssql/data
+      - /c/Users/amals/Desktop/Accolite/docker_storage/log:/var/opt/mssql/log
+      - /c/Users/amals/Desktop/Accolite/docker_storage/backup:/var/opt/mssql/backup

@@ -8,6 +8,7 @@ EXPOSE 443
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
 COPY ["Accolite.Bank.API/Accolite.Bank.API.csproj", "Accolite.Bank.API/"]
+COPY ["Accolite.Bank.API/Accolite.Bank.Data.MsSql.csproj", "Accolite.Bank.Data.MsSql/"]
 RUN dotnet restore "Accolite.Bank.API/Accolite.Bank.API.csproj"
 COPY . .
 WORKDIR "/src/Accolite.Bank.API"
