@@ -28,21 +28,21 @@ public class UsersController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<ActionResult<User>> AddAsync(User user, CancellationToken ct = default)
+    public async Task<ActionResult<User>> AddAsync(User user)
     {
-        return Ok(await _usersProvider.InsertAsync(user, ct));
+        return Ok(await _usersProvider.InsertAsync(user));
     }
 
     [HttpPut]
-    public async Task<ActionResult<User?>> UpdateAsync(User user, CancellationToken ct = default)
+    public async Task<ActionResult<User?>> UpdateAsync(User user)
     {
-        return Ok(await _usersProvider.UpdateAsync(user, ct));
+        return Ok(await _usersProvider.UpdateAsync(user));
     }
 
     [HttpDelete]
-    public async Task<ActionResult> DeleteAsync(int id, CancellationToken ct = default)
+    public async Task<ActionResult> DeleteAsync(int id)
     {
-        await _usersProvider.DeleteAsync(id, ct);
+        await _usersProvider.DeleteAsync(id);
         return Ok();
     }
 }

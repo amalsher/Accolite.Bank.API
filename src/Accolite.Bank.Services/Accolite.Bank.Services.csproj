@@ -12,8 +12,4 @@
     <ProjectReference Include="..\Accolite.Bank.Data.MsSql\Accolite.Bank.Data.MsSql.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Interfaces\Services\" />
-  </ItemGroup>
-
 </Project>
