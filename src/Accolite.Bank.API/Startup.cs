@@ -1,5 +1,6 @@
 ﻿using Accolite.Bank.API.Configuration;
-using Accolite.Bank.Data.MsSql.Configuration;
+using Accolite.Bank.Services.Configuration;
+using Accolite.Bank.Services.Mapping;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using Swashbuckle.AspNetCore.SwaggerUI;
 using System.Reflection;
@@ -22,7 +23,13 @@ public class Startup
 
     public void ConfigureServices(IServiceCollection services)
     {
-        services.RegisterRepositories(Configuration.GetConnectionString("AccoliteBank")!);
+        services.AddAutoMapper(
+            c => c.AddProfile<MappingConfiguration>(),
+            typeof(Startup));
+
+        services
+            .RegisterProviders(Configuration.GetConnectionString("AccoliteBank")!)
+            .RegisterServices();
         services.AddControllers()
             .AddJsonOptions(options => options.JsonSerializerOptions.ConfigureJsonSerializerOptions());
 

@@ -1,5 +1,5 @@
-﻿using Accolite.Bank.Data.MsSql.Entities;
-using Accolite.Bank.Data.MsSql.Interfaces.Repositories;
+﻿using Accolite.Bank.Services.Interfaces.Providers;
+using Accolite.Bank.Services.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Accolite.Bank.API.Controllers;
@@ -8,41 +8,41 @@ namespace Accolite.Bank.API.Controllers;
 [Route("[controller]")]
 public class UsersController : ControllerBase
 {
-    private readonly IUsersRepository _usersRepository;
+    private readonly IUsersProvider _usersProvider;
 
-    public UsersController(IUsersRepository usersRepository)
+    public UsersController(IUsersProvider usersProvider)
     {
-        _usersRepository = usersRepository;
+        _usersProvider = usersProvider;
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<UserEntity>>> GetAsync(CancellationToken ct = default)
+    public async Task<ActionResult<IEnumerable<User>>> GetAsync(CancellationToken ct = default)
     {
-        return Ok(await _usersRepository.FilterByAsync(ct: ct));
+        return Ok(await _usersProvider.GetAllAsync(ct));
     }
 
     [HttpGet("{id}")]
-    public async Task<ActionResult<IEnumerable<UserEntity>>> GetByIdAsync(int id, CancellationToken ct = default)
+    public async Task<ActionResult<IEnumerable<User>>> GetByIdAsync(int id, CancellationToken ct = default)
     {
-        return Ok(await _usersRepository.FindByIdAsync(id, ct));
+        return Ok(await _usersProvider.GetOneAsync(id, ct));
     }
 
     [HttpPost]
-    public async Task<ActionResult<UserEntity>> AddAsync(UserEntity user, CancellationToken ct = default)
+    public async Task<ActionResult<User>> AddAsync(User user, CancellationToken ct = default)
     {
-        return Ok(await _usersRepository.InsertAsync(user, ct));
+        return Ok(await _usersProvider.InsertAsync(user, ct));
     }
 
     [HttpPut]
-    public async Task<ActionResult<UserEntity?>> UpdateAsync(UserEntity user, CancellationToken ct = default)
+    public async Task<ActionResult<User?>> UpdateAsync(User user, CancellationToken ct = default)
     {
-        return Ok(await _usersRepository.UpdateAsync(user, ct));
+        return Ok(await _usersProvider.UpdateAsync(user, ct));
     }
 
     [HttpDelete]
     public async Task<ActionResult> DeleteAsync(int id, CancellationToken ct = default)
     {
-        await _usersRepository.DeleteAsync(id, ct);
+        await _usersProvider.DeleteAsync(id, ct);
         return Ok();
     }
 }

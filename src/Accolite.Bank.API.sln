@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Accolite.Bank.Data.MsSql", 
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose\docker-compose.dcproj", "{99CB601B-E027-46BB-B209-9764D708C6D5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Accolite.Bank.Services", "Accolite.Bank.Services\Accolite.Bank.Services.csproj", "{B129AF22-09AD-40A2-A3F8-2E1F6B4AD1B8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{99CB601B-E027-46BB-B209-9764D708C6D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{99CB601B-E027-46BB-B209-9764D708C6D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{99CB601B-E027-46BB-B209-9764D708C6D5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B129AF22-09AD-40A2-A3F8-2E1F6B4AD1B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B129AF22-09AD-40A2-A3F8-2E1F6B4AD1B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B129AF22-09AD-40A2-A3F8-2E1F6B4AD1B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B129AF22-09AD-40A2-A3F8-2E1F6B4AD1B8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
